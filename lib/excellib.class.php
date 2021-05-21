@@ -130,11 +130,7 @@ class MoodleExcelWorkbook {
             header('Pragma: no-cache');
         }
 
-        if (core_useragent::is_ie() || core_useragent::is_edge()) {
-            $filename = rawurlencode($filename);
-        } else {
-            $filename = s($filename);
-        }
+        $filename = s($filename);
 
         header('Content-Type: '.$mimetype);
         header('Content-Disposition: attachment; filename="'.clean_param($filename, PARAM_ASCII)."\"; filename*=UTF-8''".rawurlencode($filename));

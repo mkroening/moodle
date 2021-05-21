@@ -2372,11 +2372,6 @@ function send_temp_file($path, $filename, $pathisstring=false) {
         core_shutdown_manager::register_function('send_temp_file_finished', array($path));
     }
 
-    // if user is using IE, urlencode the filename so that multibyte file name will show up correctly on popup
-    if (core_useragent::is_ie() || core_useragent::is_edge()) {
-        $filename = urlencode($filename);
-    }
-
     // If this file was requested from a form, then mark download as complete.
     \core_form\util::form_download_complete();
 
@@ -2522,11 +2517,6 @@ function send_file($path, $filename, $lifetime = null , $filter=0, $pathisstring
     // Use given MIME type if specified, otherwise guess it.
     if (!$mimetype || $mimetype === 'document/unknown') {
         $mimetype = get_mimetype_for_sending($filename);
-    }
-
-    // if user is using IE, urlencode the filename so that multibyte file name will show up correctly on popup
-    if (core_useragent::is_ie() || core_useragent::is_edge()) {
-        $filename = rawurlencode($filename);
     }
 
     if ($forcedownload) {
