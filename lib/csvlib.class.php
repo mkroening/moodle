@@ -496,7 +496,7 @@ class csv_export_writer {
         }
         header('Expires: '. gmdate('D, d M Y H:i:s', 0) .' GMT');
         header("Content-Type: $this->mimetype\n");
-        header("Content-Disposition: attachment; filename=\"$this->filename\"; filename*=UTF-8''". rawurlencode($this->filename));
+        header("Content-Disposition: attachment; filename=\"". clean_param($this->filename, PARAM_ASCII) ."\"; filename*=UTF-8''". rawurlencode($this->filename));
     }
 
     /**

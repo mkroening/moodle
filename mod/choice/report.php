@@ -225,7 +225,7 @@
         $filename = clean_filename("$shortname " . strip_tags($choicename)) . '.txt';
 
         header("Content-Type: application/download\n");
-        header("Content-Disposition: attachment; filename=\"$filename\"; filename*=UTF-8''" . rawurlencode($filename));
+        header("Content-Disposition: attachment; filename=\"" . clean_param($filename, PARAM_ASCII) . "\"; filename*=UTF-8''" . rawurlencode($filename));
         header("Expires: 0");
         header("Cache-Control: must-revalidate,post-check=0,pre-check=0");
         header("Pragma: public");

@@ -228,7 +228,7 @@ function send_cached_image($imagepath, $etag) {
     $mimetype = get_contenttype_from_ext($pathinfo['extension']);
 
     header('Etag: "'.$etag.'"');
-    header('Content-Disposition: inline; filename="'.$imagename."\"; filename*=UTF-8''".rawurlencode($imagename));
+    header('Content-Disposition: inline; filename="'.clean_param($imagename, PARAM_ASCII)."\"; filename*=UTF-8''".rawurlencode($imagename));
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', filemtime($imagepath)) .' GMT');
     header('Expires: '. gmdate('D, d M Y H:i:s', time() + $lifetime) .' GMT');
     header('Pragma: ');
@@ -260,7 +260,7 @@ function send_uncached_image($imagepath) {
 
     $mimetype = get_contenttype_from_ext($pathinfo['extension']);
 
-    header('Content-Disposition: inline; filename="'.$imagename."\"; filename*=UTF-8''".rawurlencode($imagename));
+    header('Content-Disposition: inline; filename="'.clean_param($imagename, PARAM_ASCII)."\"; filename*=UTF-8''".rawurlencode($imagename));
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', time()) .' GMT');
     header('Expires: '. gmdate('D, d M Y H:i:s', time() + 15) .' GMT');
     header('Pragma: ');

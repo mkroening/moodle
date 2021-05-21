@@ -314,7 +314,7 @@ if ($type == "xls") {
 header("Content-Type: application/download\n");
 
 $downloadfilename = clean_filename(strip_tags($courseshortname.' '.format_string($survey->name,true)));
-header("Content-Disposition: attachment; filename=\"$downloadfilename.txt\"; filename*=UTF-8''".rawurlencode($downloadfilename));
+header("Content-Disposition: attachment; filename=\"".clean_param($downloadfilename, PARAM_ASCII).".txt\"; filename*=UTF-8''".rawurlencode($downloadfilename));
 
 // Print names of all the fields
 
