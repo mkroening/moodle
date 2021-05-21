@@ -93,6 +93,11 @@ define('PARAM_ALPHANUM', 'alphanum');
 define('PARAM_ALPHANUMEXT', 'alphanumext');
 
 /**
+ * PARAM_ASCII - US-ASCII ([\x00-\x7F]) only.
+ */
+define('PARAM_ASCII', 'ascii');
+
+/**
  * PARAM_AUTH - actually checks to make sure the string is a valid auth plugin
  */
 define('PARAM_AUTH',  'auth');
@@ -862,6 +867,10 @@ function clean_param($param, $type) {
         case PARAM_ALPHANUMEXT:
             // Remove everything not `a-zA-Z0-9_-`.
             return preg_replace('/[^A-Za-z0-9_-]/i', '', $param);
+
+        case PARAM_ASCII:
+            // Remove everything not `\x00-\x7F`.
+            return preg_replace('/[^\x00-\x7F]/', '', $param);
 
         case PARAM_SEQUENCE:
             // Remove everything not `0-9,`.
