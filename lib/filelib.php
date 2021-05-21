@@ -2380,7 +2380,7 @@ function send_temp_file($path, $filename, $pathisstring=false) {
     // If this file was requested from a form, then mark download as complete.
     \core_form\util::form_download_complete();
 
-    header('Content-Disposition: attachment; filename="'.$filename.'"');
+    header('Content-Disposition: attachment; filename="'.$filename."\"; filename*=UTF-8''".rawurlencode($filename));
     if (is_https()) { // HTTPS sites - watch out for IE! KB812935 and KB316431.
         header('Cache-Control: private, max-age=10, no-transform');
         header('Expires: '. gmdate('D, d M Y H:i:s', 0) .' GMT');
@@ -2427,7 +2427,7 @@ function send_content_uncached($content, $filename) {
     $mimetype = mimeinfo('type', $filename);
     $charset = strpos($mimetype, 'text/') === 0 ? '; charset=utf-8' : '';
 
-    header('Content-Disposition: inline; filename="' . $filename . '"');
+    header('Content-Disposition: inline; filename="' . $filename . "\"; filename*=UTF-8''" . rawurlencode($filename));
     header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
     header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 2) . ' GMT');
     header('Pragma: ');
@@ -2530,7 +2530,7 @@ function send_file($path, $filename, $lifetime = null , $filter=0, $pathisstring
     }
 
     if ($forcedownload) {
-        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        header('Content-Disposition: attachment; filename="'.$filename."\"; filename*=UTF-8''".rawurlencode($filename));
 
         // If this file was requested from a form, then mark download as complete.
         \core_form\util::form_download_complete();
@@ -2538,7 +2538,7 @@ function send_file($path, $filename, $lifetime = null , $filter=0, $pathisstring
         // If this is an swf don't pass content-disposition with filename as this makes the flash player treat the file
         // as an upload and enforces security that may prevent the file from being loaded.
 
-        header('Content-Disposition: inline; filename="'.$filename.'"');
+        header('Content-Disposition: inline; filename="'.$filename."\"; filename*=UTF-8''".rawurlencode($filename));
     }
 
     if ($lifetime > 0) {

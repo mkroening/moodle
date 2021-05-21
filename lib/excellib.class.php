@@ -137,7 +137,7 @@ class MoodleExcelWorkbook {
         }
 
         header('Content-Type: '.$mimetype);
-        header('Content-Disposition: attachment;filename="'.$filename.'"');
+        header('Content-Disposition: attachment; filename="'.$filename."\"; filename*=UTF-8''".rawurlencode($filename));
 
         $objwriter = IOFactory::createWriter($this->objspreadsheet, $this->type);
         $objwriter->save('php://output');

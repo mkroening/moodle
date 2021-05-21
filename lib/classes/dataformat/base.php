@@ -115,7 +115,7 @@ abstract class base {
         header('Expires: '. gmdate('D, d M Y H:i:s', 0) .' GMT');
         header("Content-Type: $this->mimetype\n");
         $filename = $this->filename . $this->get_extension();
-        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header("Content-Disposition: attachment; filename=\"$filename\"; filename*=UTF-8''" . rawurlencode($filename));
     }
 
     /**

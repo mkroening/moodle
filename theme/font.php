@@ -182,7 +182,7 @@ function send_cached_font($fontpath, $etag, $font, $mimetype) {
     $lifetime = 60 * 60 * 24 * 90;
 
     header('Etag: "'.$etag.'"');
-    header('Content-Disposition: inline; filename="'.$font.'"');
+    header('Content-Disposition: inline; filename="'.$font."\"; filename*=UTF-8''".rawurlencode($font));
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', filemtime($fontpath)) .' GMT');
     header('Expires: '. gmdate('D, d M Y H:i:s', time() + $lifetime) .' GMT');
     header('Pragma: ');
@@ -202,7 +202,7 @@ function send_cached_font($fontpath, $etag, $font, $mimetype) {
 }
 
 function send_uncached_font($fontpath, $font, $mimetype) {
-    header('Content-Disposition: inline; filename="'.$font.'"');
+    header('Content-Disposition: inline; filename="'.$font."\"; filename*=UTF-8''".rawurlencode($font));
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', time()) .' GMT');
     header('Expires: '. gmdate('D, d M Y H:i:s', time() + 15) .' GMT');
     header('Pragma: ');

@@ -122,7 +122,7 @@ if (!empty($_SERVER['HTTP_IF_NONE_MATCH']) || !empty($_SERVER['HTTP_IF_MODIFIED_
 require_once("$CFG->dirroot/lib/xsendfilelib.php");
 
 header('Etag: "'.$etag.'"');
-header('Content-Disposition: inline; filename="'.$filename.'"');
+header('Content-Disposition: inline; filename="'.$filename."\"; filename*=UTF-8''".rawurlencode($filename));
 header('Last-Modified: '. gmdate('D, d M Y H:i:s', filemtime($file)) .' GMT');
 header('Expires: '. gmdate('D, d M Y H:i:s', time() + $lifetime) .' GMT');
 header('Pragma: ');
