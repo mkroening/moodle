@@ -276,10 +276,11 @@ function url_export_contents($cm, $baseurl) {
     if (empty($isurl)) {
         return [];
     }
+    $filename = str_replace('&amp;', '&', format_string($urlrecord->name));
 
     $url = array();
     $url['type'] = 'url';
-    $url['filename']     = clean_param(format_string($urlrecord->name), PARAM_FILE);
+    $url['filename']     = clean_param($filename, PARAM_FILE);
     $url['filepath']     = null;
     $url['filesize']     = 0;
     $url['fileurl']      = $fullurl;
