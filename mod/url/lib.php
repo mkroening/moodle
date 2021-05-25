@@ -273,7 +273,7 @@ function url_export_contents($cm, $baseurl) {
     $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
     $urlrecord = $DB->get_record('url', array('id'=>$cm->instance), '*', MUST_EXIST);
 
-    $fullurl = str_replace('&amp;', '&', url_get_full_url($urlrecord, $cm, $course));
+    $fullurl = url_get_full_url($urlrecord, $cm, $course);
     $isurl = clean_param($fullurl, PARAM_URL);
     if (empty($isurl)) {
         return [];
